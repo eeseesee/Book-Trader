@@ -1,0 +1,21 @@
+/* global styles */
+@import 'fonts/font-awesome';
+
+:global(body) {
+
+  html, body {
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+  }
+
+  a {
+  text-decoration: none;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: none !important;
+  }
+}
+
+}

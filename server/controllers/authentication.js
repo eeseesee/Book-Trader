@@ -13,12 +13,13 @@ exports.signin = function(req, res, next) {
 }
 
 exports.signup = function(req, res, next) {
+  const dispName = req.body.dispName;
   const email = req.body.email;
   const password = req.body.password;
 
   // Check that both email and password were provided
   if(!email || !password) {
-    return res.status(422).send({ error: 'You must provide and email and password' });
+    return res.status(422).send({ error: 'You must provide both an email and a password.' });
   }
 
   // See if a user with given email exists
@@ -27,11 +28,12 @@ exports.signup = function(req, res, next) {
 
     // If a user with email does exist, return error
     if (existingUser) {
-      return res.status(422).send({ error: 'Email is in use' });
+      return res.status(422).send({ error: 'An account with that email already exists.' });
     }
 
     // If a user with email does not exists, create & save user
     const user = new User({
+      dispName: dispName,
       email: email,
       password: password
     });

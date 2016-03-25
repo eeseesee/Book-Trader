@@ -19,7 +19,7 @@ app.use(webpackDevMiddleware(compiler, {noInfo: true, publicPath: config.output.
 app.use(webpackHotMiddleware(compiler));
 
 // DB Setup
-const mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || "mongodb://localhost/reduxapp";
+const mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || "mongodb://localhost/booktrader";
 
 mongoose.connect(mongoUri, function(err) {
     if(err) {

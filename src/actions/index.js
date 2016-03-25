@@ -2,11 +2,12 @@ import axios from 'axios';
 
 import ActionTypes from './types';
 
-export function signUpUser(email, password) {
+export function signUpUser(name, email, password) {
   const signupRequest = axios({
     method: 'post',
     url: '/signup',
     data: {
+      dispName: name,
       email: email,
       password: password
     }
@@ -38,4 +39,11 @@ export function signInUser(email, password) {
     type: ActionTypes.SIGN_IN,
     payload: signinRequest
   };
+}
+
+export function setMessage(message) {
+  return {
+    type: ActionTypes.SET_MESSAGE,
+    payload: message
+  }
 }

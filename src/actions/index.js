@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import ActionTypes from './types';
+import { SIGN_UP, SIGN_OUT, SIGN_IN, SET_MESSAGE, FETCH_USER } from './types';
 
 export function signUpUser(name, email, password) {
   const signupRequest = axios({
@@ -14,14 +14,14 @@ export function signUpUser(name, email, password) {
   });
 
   return {
-    type: ActionTypes.SIGN_UP,
+    type: SIGN_UP,
     payload: signupRequest
   };
 }
 
 export function signOutUser() {
   return {
-    type: ActionTypes.SIGN_OUT
+    type: SIGN_OUT
   }
 }
 
@@ -36,14 +36,27 @@ export function signInUser(email, password) {
   });
 
   return {
-    type: ActionTypes.SIGN_IN,
+    type: SIGN_IN,
     payload: signinRequest
   };
 }
 
 export function setMessage(message) {
   return {
-    type: ActionTypes.SET_MESSAGE,
+    type: SET_MESSAGE,
     payload: message
   }
+}
+
+export function fetchUser(token) {
+  const userRequest = axios({
+    method: 'get',
+    url: '/user',
+    headers: {'Authorization': 'JWT '.concat(token)}
+  });
+
+  return {
+    type: FETCH_USER,
+    payload: userRequest
+  };
 }

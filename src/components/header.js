@@ -35,12 +35,19 @@ class Header extends Component {
             <li className="nav-item">
               <Link to="/">Home</Link>
             </li>
-            <li className="nav-item">
-              <Link to="/resources">Resources</Link>
-            </li>
+            {this.props.authenticated &&
+              <li className="nav-item">
+                <Link to="/mybooks">My Books</Link>
+              </li>
+            }
             {this.props.authenticated &&
               <li className="nav-item">
                 <a onClick={() => this.props.signOutUser()}>Sign Out <i className="fa fa-sign-out"></i></a>
+              </li>
+            }
+            {this.props.authenticated &&
+              <li className="nav-item">
+                <Link to="mybooks/settings"><i className="fa fa-cog"></i></Link>
               </li>
             }
             {!this.props.authenticated &&

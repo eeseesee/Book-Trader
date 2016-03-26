@@ -8,14 +8,14 @@ export default function(ComposedComponent) {
     }
 
     componentWillMount() {
-      if (this.props.authenticated) {
-        this.context.router.push('/resources');
+      if (this.props.authentication.authenticated) {
+        this.context.router.push('/mybooks');
       }
     }
 
     componentWillUpdate(nextProps) {
-      if (nextProps.authenticated) {
-        this.context.router.push('/resources');
+      if (nextProps.authentication.authenticated) {
+        this.context.router.push('/mybooks');
       }
     }
 
@@ -25,7 +25,7 @@ export default function(ComposedComponent) {
   }
 
   function mapStateToProps(state) {
-    return { authenticated: state.auth.authenticated };
+    return { authentication: state.auth };
   }
 
   return connect(mapStateToProps)(UNAuthentication);

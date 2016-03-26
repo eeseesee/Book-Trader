@@ -1,11 +1,11 @@
-import ActionTypes from '../actions/types';
+import { SET_MESSAGE } from '../actions/types';
 
 export default function(state = '', action) {
   switch (action.type) {
-    case ActionTypes.SET_MESSAGE:
-      return {
+    case SET_MESSAGE:
+      return Object.assign({}, state, {
         message: action.payload
-      }
+      })
   }
 
   return state;

@@ -7,14 +7,10 @@ export default function({ dispatch }) {
     action.payload
       .then(function(response) {
 
-        console.log('success payload',response);
-
         const newAction = { ...action, payload: response };
         dispatch(newAction);
 
       }).catch(function(response){
-
-        console.log('failure payload',response);
 
         if (response.status === 422) {
           const newAction = {

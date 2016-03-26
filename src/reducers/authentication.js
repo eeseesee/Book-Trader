@@ -1,22 +1,22 @@
-import ActionTypes from '../actions/types';
+import { SIGN_UP, SIGN_OUT, SIGN_IN } from '../actions/types';
 
-export default function(state = {}, action) {
+export default function(state = { authenticated: false, token: '' }, action) {
   switch (action.type) {
-    case ActionTypes.SIGN_UP:
-      return {
+    case SIGN_UP:
+      return Object.assign({}, state, {
         authenticated: true,
         token: action.payload.data.token
-      }
-    case ActionTypes.SIGN_OUT:
-      return {
+      })
+    case SIGN_OUT:
+      return Object.assign({}, state, {
         authenticated: false,
         token: ''
-      }
-    case ActionTypes.SIGN_IN:
-      return {
+      })
+    case SIGN_IN:
+      return Object.assign({}, state, {
         authenticated: true,
         token: action.payload.data.token
-      }
+      })
   }
 
   return state;

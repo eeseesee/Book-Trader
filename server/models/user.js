@@ -5,7 +5,9 @@ const bcrypt = require('bcrypt-nodejs');
 const userSchema = new Schema({
   dispName: String,
   email: { type: String, unique: true, lowercase: true },
-  password: String
+  password: String,
+  city: String,
+  state: String
 });
 
 // Pre-save hook to hash password

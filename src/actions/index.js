@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { SIGN_UP, SIGN_OUT, SIGN_IN, SET_MESSAGE, FETCH_USER } from './types';
+import { SIGN_UP, SIGN_OUT, SIGN_IN, SET_MESSAGE, FETCH_USER, UPDATE_USER } from './types';
 
 export function signUpUser(name, email, password) {
   const signupRequest = axios({
@@ -58,5 +58,21 @@ export function fetchUser(token) {
   return {
     type: FETCH_USER,
     payload: userRequest
+  };
+}
+
+export function updateUser(user, token) {
+  const updateRequest = axios({
+    method: 'put',
+    url: '/user',
+    headers: {'Authorization': 'JWT '.concat(token)},
+    data: {
+      user: user
+    }
+  });
+
+  return {
+    type: UPDATE_USER,
+    payload: updateRequest
   };
 }

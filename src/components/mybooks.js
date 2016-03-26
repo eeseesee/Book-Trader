@@ -14,8 +14,13 @@ class MyBooks extends Component  {
   render() {
     return (
       <div className="mybooks">
-        <h1>{'Hello ' + this.props.user.dispName}</h1>
-        {React.cloneElement(this.props.children, {user: this.props.user})}
+        {this.props.children && React.cloneElement(this.props.children, {
+            user: this.props.user,
+            token: this.props.token,
+            message: this.props.message,
+            updateUser: this.props.updateUser,
+            setMessage: this.props.setMessage
+          })}
       </div>
     )
   }
@@ -24,7 +29,8 @@ class MyBooks extends Component  {
 function mapStateToProps(state) {
   return {
     token: state.auth.token,
-    user: state.user
+    user: state.user,
+    message: state.message.alert
    };
 }
 

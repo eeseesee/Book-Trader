@@ -12,7 +12,7 @@ export default function({ dispatch }) {
 
       }).catch(function(response){
 
-        if (response.status === 422) {
+        if (response.status === 422 || response.status === 400) {
           const newAction = {
             type: 'SET_MESSAGE',
             payload: response.data.error

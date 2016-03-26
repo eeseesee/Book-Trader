@@ -80,7 +80,7 @@ class Signup extends Component {
 }
 
 function mapStateToProps(state) {
-  return { message: state.message.message };
+  return { message: state.message.alert };
 }
 
 export default connect(mapStateToProps, actions)(Signup);

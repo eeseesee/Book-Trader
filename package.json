@@ -57,6 +57,7 @@
     "redux-logger": "^2.6.1",
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.1",
+    "underscore": "^1.8.3",
     "url-loader": "^0.5.7",
     "webpack-dev-middleware": "^1.5.1",
     "webpack-hot-middleware": "^2.10.0"

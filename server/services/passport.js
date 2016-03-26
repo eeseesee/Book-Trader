@@ -35,7 +35,7 @@ const jwtOptions = {
 // Create JWT Strategy
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
   // See if the user ID in the payload exists in the database
-  User.findOne({ _id: payload.sub }, function(err, user) {
+  User.findOne({ _id: payload.sub }, '-password', function(err, user) {
     if (err) { return done(err, false); }
 
     // If it does, call down with user

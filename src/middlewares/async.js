@@ -12,10 +12,10 @@ export default function({ dispatch }) {
 
       }).catch(function(response){
 
-        if (response.status === 422 || response.status === 400) {
+        if (response.status === 422 || response.status === 400 ) {
           const newAction = {
             type: 'SET_MESSAGE',
-            payload: response.data.error
+            payload: response.data.error || "undefined error"
           }
           dispatch(newAction);
         }
@@ -23,7 +23,7 @@ export default function({ dispatch }) {
         if (response.status === 401) {
           const newAction = {
             type: 'SET_MESSAGE',
-            payload: 'Incorrect email or password.'
+            payload: 'Unauthorized'
           }
           dispatch(newAction);
         }

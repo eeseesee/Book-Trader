@@ -11,7 +11,9 @@ import Login from './components/login';
 import Signup from './components/signup';
 import NotFound from './components/notfound';
 import Settings from './components/settings';
-import UserBooks from './components/userbooks';
+import Dashboard from './components/dashboard';
+import AddBook from './components/addbook';
+import UserRequests from './components/userrequests';
 
 import reducers from './reducers';
 import Async from './middlewares/async';
@@ -27,10 +29,12 @@ ReactDOM.render(
       <Route path="/" component={App}>
         <Route path="mybooks" component={requireAuth(MyBooks)}>
           <Redirect from="settings" to="/settings" />
-          <IndexRoute component={UserBooks} />
+          <IndexRoute component={Dashboard} />
         </Route>
         <Route component={requireAuth(MyBooks)}>
           <Route path="settings" component={Settings} />
+          <Route path="addbook" component={AddBook} />
+          <Route path="requests" component={UserRequests} />
         </Route>
         <Route path="signup" component={requireUNAuth(Signup)} />
         <Route path="login" component={requireUNAuth(Login)} />

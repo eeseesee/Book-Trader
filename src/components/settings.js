@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
 class Settings extends Component {
   constructor(props) {
     super(props)
-    this.state = { user: this.props.user }
+    this.state = { user: {}, delete: false }
+  }
+
+  componentDidMount() {
+    this.props.fetchUser(this.props.token);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const fetched = nextProps.user;
+    this.setState({ user: fetched });
   }
 
   handleNameChange(event) {
@@ -15,18 +26,6 @@ class Settings extends Component {
   handleEmailChange(event) {
     const newUser = this.state.user;
     newUser.email = event.target.value;
-    this.setState({ user: newUser })
-  }
-
-  handlePasswordChange(event) {
-    const newUser = this.state.user;
-    newUser.password = event.target.value;
-    this.setState({ user: newUser })
-  }
-
-  handleconfirmPasswordChange(event) {
-    const newUser = this.state.user;
-    newUser.confirmPassword = event.target.value;
     this.setState({ user: newUser })
   }
 
@@ -44,16 +43,19 @@ class Settings extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    if (this.validatePassword()) {
-      this.props.updateUser(this.state.user, this.props.token);
-    }
+    this.props.updateUser(this.state.user, this.props.token);
   }
 
-  validatePassword() {
-    if (this.state.user.password === this.state.user.confirmPassword) {
-      return true;
-    }
-    this.props.setMessage('Passwords do not match. Try again!');
+  showDeleteButton() {
+    const current = this.state.delete;
+    this.setState({ delete: !current });
+  }
+
+  handleDeleteAccount(event) {
+    event.preventDefault();
+    this.props.deleteUser(this.props.token);
+    this.props.deleteUserBooks(this.props.token);
+    this.props.signOutUser();
   }
 
   render() {
@@ -71,35 +73,46 @@ class Settings extends Component {
                 <input className="form-control" placeholder={this.props.user.email || "Email"} value={this.state.email} onChange={this.handleEmailChange.bind(this)}/>
             </div>
             <div className="form-group">
-                <label>Password</label>
-                <input className="form-control" type="password" placeholder="New Password" value={this.state.password} onChange={this.handlePasswordChange.bind(this)}/>
-            </div>
-            <div className="form-group">
-                <label>Password</label>
-                <input className="form-control" type="password" placeholder="Confirm New Password" value={this.state.confirmPassword} onChange={this.handleconfirmPasswordChange.bind(this)} />
-            </div>
-            <div className="form-group">
                 <label>City</label>
                 <input className="form-control" placeholder={this.props.user.city || "City"} value={this.state.City} onChange={this.handleCityChange.bind(this)} />
             </div>
             <div className="form-group">
                 <label>State</label>
-                <input className="form-control" placeholder={this.props.user.USState || "State"} value={this.state.USState} onChange={this.handleUSStateChange.bind(this)} />
+                <input className="form-control" placeholder={this.props.user.state || "State"} value={this.state.USState} onChange={this.handleUSStateChange.bind(this)} />
             </div>
-            <div>
+            <div className="action-buttons">
               <button type="submit" className="btn btn-primary btn-block">Make Changes</button>
               <button type="reset" className="btn btn-primary btn-block">Reset</button>
+              {!this.state.delete &&
+                <button className="btn btn-warning btn-block" onClick={this.showDeleteButton.bind(this)}>Delete Account</button>
+              }
+              {this.state.delete &&
+                <div>
+                  <label>Are you sure you want to permanently delete your account?</label>
+                  <div className="col-sm-6">
+                    <button className="btn btn-danger btn-block" onClick={this.handleDeleteAccount.bind(this)}>Yes</button>
+                  </div>
+                  <div className="col-sm-6">
+                    <button className="btn btn-default btn-block" onClick={this.showDeleteButton.bind(this)}>No</button>
+                  </div>
+                </div>
+              }
             </div>
           </form>
         </div>
         {this.props.message &&
-        <div>
           <div className="alert alert-danger" role="alert">{this.props.message}</div>
-        </div>
         }
       </div>
     )
   }
 }
 
-export default Settings;
+function mapStateToProps(state) {
+  return {
+    user: state.user,
+    token: state.auth.token
+   };
+}
+
+export default connect(mapStateToProps, actions)(Settings);

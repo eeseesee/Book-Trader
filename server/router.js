@@ -1,5 +1,6 @@
 const Authentication = require('./controllers/authentication');
 const User = require('./controllers/user');
+const Book = require('./controllers/book');
 const passportService = require('./services/passport');
 const passport = require('passport');
 
@@ -14,4 +15,16 @@ module.exports = function(app) {
   // fetching and changing user account is handled by user controller
   app.get('/user', requireAuth, User.getuser);
   app.put('/user', requireAuth, User.updateuser);
+  app.delete('/user', requireAuth, User.deleteuser);
+
+  // adding and requesting books is handled by book controller
+  app.get('/books', requireAuth, Book.getallbooks);
+  app.post('/books', requireAuth, Book.addbook);
+  app.delete('/books', requireAuth, Book.deletebook);
+
+  app.get('/books/user', requireAuth, Book.getbooksbyuser);
+  app.delete('/books/user', requireAuth, Book.deletebooksbyuser);
+
+  // requests are handled by request controller
+
 }

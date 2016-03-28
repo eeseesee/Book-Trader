@@ -18,7 +18,9 @@ const localLogin = new LocalStrategy(localOptions, function(email, password, don
       if (err) { return done(err); }
 
       // If not, call done without a user object
-      if (!isMatch) { return done(null, false); }
+      if (!isMatch) {
+        return done(null, false);
+      }
 
       // Call done with user if verified
       return done(null, user);
@@ -35,7 +37,7 @@ const jwtOptions = {
 // Create JWT Strategy
 const jwtLogin = new JwtStrategy(jwtOptions, function(payload, done) {
   // See if the user ID in the payload exists in the database
-  User.findOne({ _id: payload.sub }, '-password', function(err, user) {
+  User.findOne({ _id: payload.sub },'-password', function(err, user) {
     if (err) { return done(err, false); }
 
     // If it does, call down with user

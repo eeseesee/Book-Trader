@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 
-export default class MyBooks extends Component  {
+class UserRequests extends Component {
   constructor(props) {
     super(props)
   }
 
   render() {
     return (
-      <div className="my-books">
-        {this.props.children}
+      <div className="user-requests">
+        <h3>Your Requests</h3>
       </div>
     )
   }
 }
+
+export default UserRequests;

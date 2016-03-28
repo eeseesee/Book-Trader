@@ -13,7 +13,7 @@ const userSchema = new Schema({
 // Pre-save hook to hash password
 userSchema.pre('save', function(next) {
   const user = this;
-
+  
   // Generate a encryption salt
   bcrypt.genSalt(10, function(err, salt) {
     if (err) { return next(err); }

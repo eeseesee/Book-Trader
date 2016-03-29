@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-export default class MyBooks extends Component  {
+export default class AllBooks extends Component  {
   constructor(props) {
     super(props)
   }
 
   render() {
     return (
-      <div className="my-books">
+      <div className="all-books">
         {this.props.children}
       </div>
     )

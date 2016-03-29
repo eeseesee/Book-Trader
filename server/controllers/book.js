@@ -30,7 +30,9 @@ exports.deletebook = function(req, res, next) {
 }
 
 exports.getallbooks = function(req, res, next) {
-  Book.find({}, function(err, data) {
+  const userID = req.user._id;
+
+  Book.find({ addedBy: { $ne: mongoose.Types.ObjectId(userID) }}, function(err, data) {
       if (err) {
         return res.status(400).send({ error: 'Error fetching all books.'} )
       }

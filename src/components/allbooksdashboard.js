@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import { Link } from 'react-router';
 
-import UserBooks from './userbooks';
+import AllBooksList from './allbookslist';
 
-class Dashboard extends Component {
+class AllBooksDashboard extends Component {
   constructor(props) {
     super(props)
   }
@@ -18,11 +18,10 @@ class Dashboard extends Component {
     return (
       <div className="dashboard">
         <div>
-          <button className="btn btn-default"><Link to="/addbook">Add a Book</Link></button>
-          <button className="btn btn-default"><Link to="/requests">Your Requests</Link></button>
+          <h1>Book Trader Library</h1>
         </div>
         <div>
-          <UserBooks books={this.props.books} message={this.props.message} token={this.props.token} deleteBook={this.props.deleteBook} />
+          <AllBooksList books={this.props.books} message={this.props.message} token={this.props.token} />
         </div>
       </div>
     )
@@ -37,4 +36,4 @@ function mapStateToProps(state) {
    };
 }
 
-export default connect(mapStateToProps, actions)(Dashboard);
+export default connect(mapStateToProps, actions)(AllBooksDashboard);

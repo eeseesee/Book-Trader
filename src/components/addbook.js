@@ -27,7 +27,7 @@ class AddBook extends Component {
 
   render() {
     return (
-      <div className="add-book">
+      <div className="add-book col-sm-4 col-sm-offset-4">
         <h3>Add to your library</h3>
         <div>
           <form className="" onSubmit={this.handleSubmit.bind(this)}>

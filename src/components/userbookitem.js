@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class BookItem extends Component {
+class UserBookItem extends Component {
   constructor(props) {
     super(props)
   }
@@ -18,7 +18,7 @@ class BookItem extends Component {
           <div className="caption">
             <h3>{this.props.book.title}</h3>
             <p>{this.props.book.author}</p>
-            <p><button onClick={this.handleDelete.bind(this)} className="btn btn-danger">Delete Book</button></p>
+            <button onClick={this.handleDelete.bind(this)} className="btn btn-danger">Delete Book</button>
           </div>
         </div>
       </div>
@@ -26,4 +26,4 @@ class BookItem extends Component {
   }
 }
 
-export default BookItem;
+export default UserBookItem;

@@ -5,22 +5,31 @@ import { createStore, applyMiddleware } from 'redux';
 import createLogger from 'redux-logger';
 import { Router, Route, IndexRoute, Redirect, browserHistory } from 'react-router';
 
-import App from './components/app';
-import AllBooks from './components/allbooks';
-import UserBooks from './components/userbooks';
-import Login from './components/login';
-import Signup from './components/signup';
-import NotFound from './components/notfound';
-import Settings from './components/settings';
-import UserDashboard from './components/userdashboard';
-import AddBook from './components/addbook';
-import UserRequests from './components/userrequests';
-import AllBooksDashboard from './components/allbooksdashboard';
+// Entry
+import App from './containers/app';
+
+// App Views
+import BookPage from './views/book-page';
+import UserPage from './views/user-page';
+import RequestsPage from './views/requests-page';
+
+// App Containers
+import Login from './containers/login';
+import Signup from './containers/signup';
+import SettingsPage from './containers/settings';
+import UserDashboard from './containers/user-dashboard';
+import AddBookPage from './containers/add-book';
+import BookDashboard from './containers/book-dashboard';
+import RequestsDashboard from './containers/requests-dashboard';
+
+// App Dummy Components
+import NotFound from './dummies/not-found';
+
 
 import reducers from './reducers';
 import Async from './middlewares/async';
-import requireAuth from './components/require_authentication';
-import requireUNAuth from './components/require_UNauthentication';
+import requireAuth from './components/Auth/require-authentication';
+import requireUNAuth from './components/Auth/require-UNauthentication';
 
 const loggerMiddleware = createLogger();
 const createStoreWithMiddleware = applyMiddleware(Async, loggerMiddleware)(createStore);
@@ -29,21 +38,23 @@ ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
-        <Route path="mybooks" component={requireAuth(UserBooks)}>
+        <Route path="mybooks" component={requireAuth(UserPage)}>
           <Redirect from="settings" to="/settings" />
           <IndexRoute component={UserDashboard} />
         </Route>
-        <Route component={requireAuth(UserBooks)}>
-          <Route path="settings" component={Settings} />
-          <Route path="addbook" component={AddBook} />
-          <Route path="requests" component={UserRequests} />
+        <Route component={requireAuth(UserPage)}>
+          <Route path="settings" component={SettingsPage} />
+          <Route path="addbook" component={AddBookPage} />
+          <Route path="requests" component={RequestsPage} >
+            <IndexRoute component={RequestsDashboard} />
+          </Route>
         </Route>
-        <Route path="books" component={requireAuth(AllBooks)}>
-          <IndexRoute component={AllBooksDashboard} />
+        <Route path="library" component={BookPage} >
+          <IndexRoute component={BookDashboard} />
         </Route>
         <Route path="signup" component={requireUNAuth(Signup)} />
         <Route path="login" component={requireUNAuth(Login)} />
-        <Route path="*" component={NotFound}/>
+        <Route path="*" component={NotFound} />
       </Route>
     </Router>
   </Provider>

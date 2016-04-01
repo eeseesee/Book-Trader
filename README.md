@@ -1,4 +1,4 @@
-# Redux Auth Boilerplate
+# Book Trader App
 
 - Redux with React and Babel support
 - Express server

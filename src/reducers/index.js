@@ -1,14 +1,16 @@
 import { combineReducers } from 'redux';
-import authenticationReducer from './authentication';
+import authReducer from './auth';
 import messageReducer from './message';
 import userReducer from './user';
 import bookReducer from './book';
+import externalSearchReducer from './external-search';
 
 const rootReducer = combineReducers({
-  auth: authenticationReducer,
+  auth: authReducer,
   message: messageReducer,
   user: userReducer,
-  books: bookReducer
+  books: bookReducer,
+  searchResults: externalSearchReducer
 });
 
 export default rootReducer;

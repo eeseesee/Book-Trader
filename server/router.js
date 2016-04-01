@@ -18,13 +18,14 @@ module.exports = function(app) {
   app.delete('/user', requireAuth, User.deleteuser);
 
   // adding and requesting books is handled by book controller
-  app.get('/books', requireAuth, Book.getallbooks);
+  app.get('/books', Book.getallbooks);
   app.post('/books', requireAuth, Book.addbook);
   app.delete('/books', requireAuth, Book.deletebook);
 
-  app.get('/books/user', requireAuth, Book.getbooksbyuser);
-  app.delete('/books/user', requireAuth, Book.deletebooksbyuser);
+  app.post('/books/request', requireAuth, Book.requestbook);
+  app.put('/books/request', requireAuth, Book.approverequest);
+  app.delete('/books/request', requireAuth, Book.removerequest);
 
-  // requests are handled by request controller
-
+  app.delete('/user/books', requireAuth, Book.deletebooksbyuser);
+  app.delete('/user/requests', requireAuth, Book.deleterequestsbyuser);
 }

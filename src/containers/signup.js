@@ -40,7 +40,7 @@ class Signup extends Component {
 
   render() {
     return (
-      <div className="signup col-sm-4 col-sm-offset-4">
+      <div className="signup content col-sm-4 col-sm-offset-4">
         <div>
         <form className="" onSubmit={this.handleSubmit.bind(this)}>
           <div className="form-group">
@@ -60,7 +60,7 @@ class Signup extends Component {
                 <input className="form-control" type="password" placeholder="Confirm Password" value={this.state.confirmPassword} onChange={this.handleconfirmPasswordChange.bind(this)} />
             </div>
             <div>
-              <button type="submit" className="btn btn-primary">Create Account</button>
+              <button type="submit" className="btn btn-xl btn-block">Create Account</button>
             </div>
           </form>
         </div>

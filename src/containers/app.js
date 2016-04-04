@@ -44,8 +44,10 @@ class App extends Component {
     return (
       <div>
         <Header />
-        {this.renderErrorMessage()}
-        {this.props.children}
+        <section className="content">
+          {this.renderErrorMessage()}
+          {this.props.children}
+        </section>
       </div>
     )
   }

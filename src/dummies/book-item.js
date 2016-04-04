@@ -31,17 +31,15 @@ class BookItem extends Component {
     const disabled = this.state.disabled ? "disabled" : "";
 
     return (
-      <div className="book-item">
-        <div className="col-sm-4 col-md-3">
-          <div className="thumbnail">
-            <img src={thumbnail} alt={title}></img>
+        <div className="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+          <div className="thumbnail book-item">
+            <img className="article-image" src={thumbnail} alt={title}></img>
             <div className="caption">
-              <h3 className="title">{title}</h3>
-              <h4 className="author">{authors}</h4>
+              <h3 className="article-header">{title}</h3>
+              <p className="source">{authors}</p>
               {this.props.isAuthenticated &&
-                <button onClick={this.handleClick.bind(this)} className={"btn btn-primary"+disabled} disabled={this.state.disabled}>{this.state.text}</button>
+                <button onClick={this.handleClick.bind(this)} className={"btn btn-xl btn-block "+disabled} disabled={this.state.disabled}>{this.state.text}</button>
               }
-          </div>
           </div>
         </div>
       </div>

@@ -12,6 +12,7 @@ import App from './containers/app';
 import BookPage from './views/book-page';
 import UserPage from './views/user-page';
 import RequestsPage from './views/requests-page';
+import HomePage from './views/home-page';
 
 // App Containers
 import Login from './containers/login';
@@ -38,6 +39,7 @@ ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
+        <IndexRoute component={HomePage} />
         <Route path="mybooks" component={requireAuth(UserPage)}>
           <Redirect from="settings" to="/settings" />
           <IndexRoute component={UserDashboard} />

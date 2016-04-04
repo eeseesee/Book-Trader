@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import Masonry from 'react-masonry-component'
 import { connect } from 'react-redux'
 import { requestBook } from '../actions/requests'
 import filterBooks from '../common/filterBooks'
@@ -11,18 +12,20 @@ class BookDashboard extends Component {
   }
 
   render() {
+    const childElements = this.props.availableBooks.map((book) => {
+      return (
+        <BookItem isAuthenticated={this.props.isAuthenticated} key={book._id} book={book} action={'Request Book'} bookAction={() => this.props.requestBook(book._id, this.props.token)} afterAction={'Requested'} />
+        )
+      })
+
     return (
       <div className="book-dashboard">
         <div>
           <h2 className="page-header">Book Trader Library</h2>
         </div>
-        <div className="book-list">
-          <div className="row">
-            {this.props.availableBooks.map((book) => {
-              return <BookItem isAuthenticated={this.props.isAuthenticated} key={book._id} book={book} action={'Request Book'} bookAction={() => this.props.requestBook(book._id, this.props.token)} afterAction={'Requested'} />
-            })}
-          </div>
-        </div>
+        <Masonry >
+          {childElements}
+        </Masonry>
       </div>
     )
   }

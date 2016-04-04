@@ -59,7 +59,7 @@ class Settings extends Component {
 
   render() {
     return (
-      <div className="settings col-sm-4 col-sm-offset-4">
+      <div className="settings content col-sm-4 col-sm-offset-4">
         <h3>Edit Account Settngs</h3>
         <div>
           <form className="" onSubmit={this.handleSubmit.bind(this)}>
@@ -80,10 +80,9 @@ class Settings extends Component {
                 <input className="form-control" placeholder={this.props.user.state || "State"} value={this.state.USState} onChange={this.handleUSStateChange.bind(this)} />
             </div>
             <div className="action-buttons">
-              <button type="submit" className="btn btn-primary btn-block">Make Changes</button>
-              <button type="reset" className="btn btn-primary btn-block">Reset</button>
+              <button type="submit" className="btn btn-xl btn-block">Make Changes</button>
               {!this.state.delete &&
-                <button className="btn btn-warning btn-block" onClick={this.showDeleteButton.bind(this)}>Delete Account</button>
+                <button className="btn btn-danger btn-block" onClick={this.showDeleteButton.bind(this)}>Delete Account</button>
               }
               {this.state.delete &&
                 <div>

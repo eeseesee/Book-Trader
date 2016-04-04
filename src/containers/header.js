@@ -7,9 +7,7 @@ import NavBar from '../dummies/navbar'
 class Header extends Component {
   render() {
     return (
-      <div className="header">
-        <NavBar isAuthenticated={this.props.isAuthenticated} signOutUser={() => this.props.signOutUser()} />
-      </div>
+      <NavBar isAuthenticated={this.props.isAuthenticated} signOutUser={() => this.props.signOutUser()} />
     )
   }
 }

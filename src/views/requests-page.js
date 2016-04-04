@@ -7,7 +7,7 @@ class RequestsPage extends Component  {
 
   render() {
     return (
-      <div className="requests-page">
+      <div className="requests-page container">
         {this.props.children}
       </div>
     )

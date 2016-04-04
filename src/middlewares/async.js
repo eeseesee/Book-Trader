@@ -23,7 +23,7 @@ export default function({ dispatch }) {
         if (response.status === 401) {
           const newAction = {
             type: 'SET_MESSAGE',
-            payload: 'Unauthorized'
+            payload: 'Incorrect email or password'
           }
           dispatch(newAction);
         }

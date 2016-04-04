@@ -31,19 +31,17 @@ class RequestItem extends Component {
     const disabled = this.state.disabled ? "disabled" : "";
 
     return (
-      <div className="book-item">
-        <div className="col-sm-12">
-          <div className="thumbnail">
-            <img src={thumbnail} alt={title}></img>
-            <div className="caption">
-              <h3 className="title">{title}</h3>
-              <h4 className="author">{authors}</h4>
-              {this.state.text &&
-                <button onClick={this.handleClick.bind(this)} className={"btn btn-primary"+disabled} disabled={this.state.disabled}>{this.state.text}</button>
-              }
+      <div className="col-sm-12">
+        <div className="thumbnail book-item">
+          <img className="article-image" src={thumbnail} alt={title}></img>
+          <div className="caption">
+            <h3 className="article-header">{title}</h3>
+            <p className="source">{authors}</p>
+            {this.state.text &&
+              <button onClick={this.handleClick.bind(this)} className={"btn btn-primary"+disabled} disabled={this.state.disabled}>{this.state.text}</button>
+            }
           </div>
-          </div>
-        </div>
+        </div>  
       </div>
     )
   }

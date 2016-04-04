@@ -1,21 +1,232 @@
 /* global styles */
 @import 'fonts/font-awesome';
+@import 'fonts/droid-serif';
+@import 'fonts/montserrat';
 
 :global(body) {
 
+  /* Global */
   html, body {
     margin: 0px;
     padding: 0px;
     height: 100%;
   }
 
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
   a {
   text-decoration: none;
 
-  &:hover {
-    cursor: pointer;
-    text-decoration: none !important;
+    &:hover {
+      cursor: pointer;
+      text-decoration: none !important;
+    }
   }
-}
+
+  .content {
+    margin-top: 50px;
+  }
+
+  /* Buttons */
+  .btn {
+    margin-bottom: 15px;
+  }
+
+  .btn-xl {
+    background-color: #84a2a6;
+    color: #ffffff;
+    border: none;
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-radius: 3px;
+    font-size: 18px;
+    padding: 15px 40px;
+  }
+  .btn-xl:hover,
+  .btn-xl:focus,
+  .btn-xl:active {
+    color: #ffffff;
+    background-color: #fec503;
+    border-color: #f6bf01;
+  }
+
+  .btn-xl-yellow {
+    background-color: #fed136;
+  }
+
+  /* Navbar */
+  .topnav {
+    font-weight: bold;
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #fed136;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .navbar-toggle {
+    background-color: #fed136;
+    border: none;
+
+    .icon-bar {
+      color: #fff;
+    }
+  }
+
+  .topnav .navbar-brand {
+    color: #09454d;
+    font-weight: 700;
+    font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial;
+  }
+
+  .navbar-brand:hover,
+  .navbar-brand:focus {
+    color: #09454d;
+  }
+
+  .topnav ul.navbar-nav li a {
+    color: #09454d;
+  }
+
+  .topnav ul.navbar-nav li a:hover,
+  .topnav ul.navbar-nav li a:focus {
+    background-color: #fed136;
+    color: #09454d;
+  }
+
+  /* Service Section */
+  .services {
+    position: relative;
+    padding: 150px 0px 200px 0px;
+  }
+
+  @media (max-width: 768px) {
+    .services {
+      padding: 50px 0px 50px 0px;
+    }
+
+    .home-image-title {
+      font-size: 16px;
+      line-height: 16px;
+      margin-top: 100px;
+    }
+
+    .home-image-sub-title {
+      font-size: 45px;
+      line-height: 45px;
+      margin-bottom: 50px
+    }
+  }
+
+  .section-heading {
+    font-size: 50px;
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-top: 100;
+    margin-bottom: 15px;
+  }
+
+  .section-subheading {
+    font-size: 16px;
+    font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: none;
+    font-style: italic;
+    font-weight: 400;
+    margin-bottom: 75px;
+  }
+
+  .service-heading {
+    margin: 15px 0;
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 16px;
+  }
+
+  .service-tag {
+    font-size: 16px;
+    font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: none;
+    font-weight: 400;
+  }
+
+  .fa-primary {
+    color: #fed136;
+  }
+
+  /* Home Image */
+  .home-image {
+    position: relative;
+    margin-top: 50px;
+    background: url(./img/home.jpg);
+    width: 100%;
+    height: 100%;
+    background-repeat: none;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+  }
+
+  .home-image-title {
+    color: #FFF;
+    font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-style: italic;
+    font-size: 30px;
+    line-height: 20px;
+    margin-top: 200px;
+    margin-bottom: 25px;
+  }
+
+  .home-image-sub-title {
+    color: #FFF;
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 75px;
+    line-height: 75px;
+    margin-bottom: 200px;
+  }
+
+  /* Dashboards */
+  .book-item {
+    box-shadow: 1px 2px 20px 1px #d3d3d3;
+
+    .article-image {
+      margin-top: 20px;
+    }
+  }
+
+  .request-header {
+    width: 100%;
+    background-color: #e6eced;
+    color: #09454d;
+    font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-radius: 3px;
+    box-shadow: 1px 2px 5px 1px #d3d3d3;
+    font-size: 18px;
+    padding: 15px 30px;
+    text-align: center;
+  }
+
+  .search-result {
+    margin-top: 25px;
+    padding: 10px;
+    box-shadow: 1px 2px 20px 1px #d3d3d3;
+  }
+
+  .add-book-page {
+    padding-bottom: 50px;
+
+    .search-result-text {
+      margin-left: 20px;
+    }
+  }
+
+
 
 }

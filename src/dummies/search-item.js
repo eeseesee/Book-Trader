@@ -36,13 +36,13 @@ class BookItem extends Component {
     return (
       <div className="search-result row">
         <div className="col-sm-2">
-          <img src={thumbnail} className="img-rounded"></img>
+          <img src={thumbnail} className="img-rounded center-block"></img>
         </div>
-        <div className="col-sm-10">
-          <h4 className="title">{title}</h4>
-          <h5 className="authors text-muted">{authors}</h5>
+        <div className="col-sm-9 col-sm-offset-3 search-result-text">
+          <h3 className="title">{title}</h3>
+          <p className="authors text-muted">{authors}</p>
           <p>{description}</p>
-          <button onClick={this.handleClick.bind(this)} className={"btn btn-primary"+disabled} disabled={this.state.disabled}>{this.state.text}</button>
+          <button onClick={this.handleClick.bind(this)} className={"btn btn-xl "+disabled} disabled={this.state.disabled}>{this.state.text}</button>
         </div>
       </div>
     )

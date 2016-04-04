@@ -33,18 +33,35 @@ module.exports = {
         loader: 'style!css'
       },
       {
-        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&minetype=application/font-woff"
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "url-loader?limit=10000&minetype=application/font-woff"
       },
       {
-        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader"
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "file-loader"
       },
       {
-        test: /\.scss$/, loader: 'style!css?localIdentName=[path][name]--[local]!postcss-loader!sass',
+        test: /\.scss$/,
+        loader: 'style!css?localIdentName=[path][name]--[local]!postcss-loader!sass',
       },
       {
-      test: /\.jpg$/,
+        test: /\.jpg$/,
         loader: 'file?name=[name].[ext]',
-      }
+      },
+      {
+        test: /masonry|imagesloaded|fizzy\-ui\-utils|desandro\-|outlayer|get\-size|doc\-ready|eventie|eventemitter/,
+        loader: 'imports?define=>false&this=>window'
+    }
     ]
-  }
+  },
+  postcss: (webpack) => {
+    return [
+      autoprefixer({
+        browsers: ['last 2 versions'],
+      }),
+      postcssImport({
+        addDependencyTo: webpack,
+      }),
+    ];
+  },
 }

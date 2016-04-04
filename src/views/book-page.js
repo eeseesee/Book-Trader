@@ -7,7 +7,7 @@ class BookPage extends Component  {
 
   render() {
     return (
-      <div className="book-page">
+      <div className="book-page container">
         {this.props.children}
       </div>
     )

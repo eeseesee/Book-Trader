@@ -12,10 +12,10 @@ class NavBar extends Component {
 
   render () {
     return (
-      <nav className="navbar navbar-default">
-        <div className="container-fluid">
+      <nav className="navbar navbar-fixed-top topnav" role="navigation">
+        <div className="container">
           <div className="navbar-header">
-            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-target">
               <span className="sr-only">Toggle navigation</span>
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
@@ -23,7 +23,7 @@ class NavBar extends Component {
             </button>
             <div className="navbar-brand"><Link to="/">Book Trader</Link></div>
           </div>
-        <div id="navbar" className="navbar-collapse collapse">
+        <div id="navbar-collapse-target" className="navbar-collapse collapse">
           <ul className="nav navbar-nav">
             <li className="nav-item">
               <Link to="/library">Library</Link>
@@ -44,9 +44,9 @@ class NavBar extends Component {
                 <Link to="mybooks/settings"><i className="fa fa-cog"></i></Link>
               </li>
             </ul>
-            }
-            {!this.props.isAuthenticated &&
-              <ul className="nav navbar-nav navbar-right">
+          }
+          {!this.props.isAuthenticated &&
+            <ul className="nav navbar-nav navbar-right">
               <li className="nav-item">
                 <Link to="/login">Log In</Link>
               </li>

@@ -13,11 +13,8 @@ class RequestsDashboard extends Component {
   render() {
     return (
       <div className="requests-dashboard">
-        <div>
-          <h2 className="page-header">Your Book Requests</h2>
-        </div>
         <div className="col-md-3">
-          <h3 className="page-header">Requests</h3>
+          <h3 className="request-header">Requests</h3>
           <div className="book-list">
             <div className="row">
               {this.props.requestedBooks.map((book) => {
@@ -27,7 +24,7 @@ class RequestsDashboard extends Component {
           </div>
         </div>
         <div className="col-md-3">
-          <h3 className="page-header">On Loan</h3>
+          <h3 className="request-header">On Loan</h3>
           <div className="book-list">
             <div className="row">
               {this.props.onLoanBooks.map((book) => {
@@ -37,7 +34,7 @@ class RequestsDashboard extends Component {
           </div>
         </div>
         <div className="col-md-3">
-          <h3 className="page-header">Pending requests</h3>
+          <h3 className="request-header">Pending approval</h3>
           <div className="book-list">
             <div className="row">
               {this.props.pendingRequests.map((book) => {
@@ -47,7 +44,7 @@ class RequestsDashboard extends Component {
           </div>
         </div>
         <div className="col-md-3">
-          <h3 className="page-header">Borrowed</h3>
+          <h3 className="request-header">Borrowed</h3>
           <div className="book-list">
             <div className="row">
               {this.props.approvedRequests.map((book) => {

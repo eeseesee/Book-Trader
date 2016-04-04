@@ -37,7 +37,7 @@ class AddBookPage extends Component {
 
   render() {
     return (
-      <div className="add-book-page">
+      <div className="add-book-page container">
         <div className="col-sm-6">
         <h2 className="page-header">Add a book to your library</h2>
         <form className="form" role="form" onSubmit={this.handleSubmit.bind(this)}>
@@ -47,7 +47,7 @@ class AddBookPage extends Component {
               <input type="text" className="form-control" placeholder="Enter title, author, or keyword" value={this.state.search} onChange={this.handleSearchChange.bind(this)} />
             </div>
           </div>
-          <button type="submit" className="btn btn-info">Search</button>
+          <button type="submit" className="btn btn-xl">Search</button>
         </form>
       </div>
       <div className="col-sm-12">

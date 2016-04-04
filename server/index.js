@@ -37,7 +37,7 @@ router(app);
 // Static Setup
 app.use(express.static('./'));
 app.get('*', function(req, res){
-  res.sendfile(path.resolve(__dirname, '../index.html'));
+  res.sendFile(path.resolve(__dirname, '../index.html'));
 });
 
 // Server Setup

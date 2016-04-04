@@ -23,19 +23,19 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="login col-sm-4 col-sm-offset-4">
+      <div className="login content col-sm-4 col-sm-offset-4">
         <div>
           <form className="" onSubmit={this.handleSubmit.bind(this)}>
             <div className="form-group">
                 <label>Email</label>
                 <input className="form-control" placeholder="Email" value={this.state.email} onChange={this.handleEmailChange.bind(this)} />
-            </div>
+          </div>
             <div className="form-group">
                 <label>Password</label>
                 <input className="form-control" type="password" placeholder="Password" value={this.state.password} onChange={this.handlePasswordChange.bind(this)} />
             </div>
             <div>
-              <button type="submit" className="btn btn-primary">Login</button>
+              <button type="submit" className="btn btn-xl btn-block">Login</button>
             </div>
           </form>
         </div>

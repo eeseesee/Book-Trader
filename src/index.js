@@ -25,11 +25,11 @@ import RequestsDashboard from './containers/requests-dashboard';
 // App Dummy Components
 import NotFound from './dummies/not-found';
 
-
+// Redux and Middlewares
 import reducers from './reducers';
 import Async from './middlewares/async';
-import requireAuth from './components/Auth/require-authentication';
-import requireUNAuth from './components/Auth/require-UNauthentication';
+import requireAuth from './containers/require-authentication';
+import requireUNAuth from './containers/require-UNauthentication';
 
 const loggerMiddleware = createLogger();
 const createStoreWithMiddleware = applyMiddleware(Async, loggerMiddleware)(createStore);

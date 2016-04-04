@@ -1,8 +1,7 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { fetchUser, updateUser, deleteUser, signOutUser } from '../actions/user';
-import { deleteUserBooks } from '../actions/book';
-import { deleteUserRequests } from '../actions/requests';
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
+import { signOutUser } from '../actions/auth'
+import { fetchUser, updateUser, deleteUser } from '../actions/user'
 
 class Settings extends Component {
   constructor(props) {
@@ -11,58 +10,56 @@ class Settings extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchUser(this.props.token);
+    this.props.fetchUser(this.props.token)
   }
 
   componentWillReceiveProps(nextProps) {
-    const fetched = nextProps.user;
-    this.setState({ user: fetched });
+    const fetched = nextProps.user
+    this.setState({ user: fetched })
   }
 
   handleNameChange(event) {
-    const newUser = this.state.user;
-    newUser.dispName = event.target.value;
+    const newUser = this.state.user
+    newUser.dispName = event.target.value
     this.setState({ user: newUser })
   }
 
   handleEmailChange(event) {
-    const newUser = this.state.user;
-    newUser.email = event.target.value;
+    const newUser = this.state.user
+    newUser.email = event.target.value
     this.setState({ user: newUser })
   }
 
   handleCityChange(event) {
-    const newUser = this.state.user;
-    newUser.city = event.target.value;
+    const newUser = this.state.user
+    newUser.city = event.target.value
     this.setState({ user: newUser })
   }
 
   handleUSStateChange(event) {
-    const newUser = this.state.user;
-    newUser.state = event.target.value;
+    const newUser = this.state.user
+    newUser.state = event.target.value
     this.setState({ user: newUser })
   }
 
   handleSubmit(event) {
-    event.preventDefault();
-    this.props.updateUser(this.state.user, this.props.token);
+    event.preventDefault()
+    this.props.updateUser(this.state.user, this.props.token)
   }
 
   showDeleteButton() {
-    const current = this.state.delete;
-    this.setState({ delete: !current });
+    const current = this.state.delete
+    this.setState({ delete: !current })
   }
 
   handleDeleteAccount(event) {
-    event.preventDefault();
-    this.props.deleteUser(this.props.token);
-    this.props.deleteUserBooks(this.props.token);
-    this.props.signOutUser();
+    event.preventDefault()
+    this.props.deleteUser(this.props.token)
   }
 
   render() {
     return (
-      <div className="login col-sm-4 col-sm-offset-4">
+      <div className="settings col-sm-4 col-sm-offset-4">
         <h3>Edit Account Settngs</h3>
         <div>
           <form className="" onSubmit={this.handleSubmit.bind(this)}>
@@ -113,8 +110,6 @@ Settings.propTypes = {
   updateUser: PropTypes.func.isRequired,
   deleteUser: PropTypes.func.isRequired,
   signOutUser: PropTypes.func.isRequired,
-  deleteUserBooks: PropTypes.func.isRequired,
-  deleteUserRequests: PropTypes.func.isRequired,
   token: PropTypes.string
 }
 
@@ -122,7 +117,7 @@ function mapStateToProps(state) {
   return {
     user: state.user,
     token: state.auth.token
-   };
+   }
 }
 
-export default connect(mapStateToProps, { fetchUser, updateUser, deleteUser, signOutUser, deleteUserBooks, deleteUserRequests })(Settings);
+export default connect(mapStateToProps, { fetchUser, updateUser, deleteUser, signOutUser })(Settings)

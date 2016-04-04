@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Book = require('../models/book');
 const mongoose = require('mongoose');
 
 exports.getuser = function(req, res, next) {
@@ -44,12 +45,46 @@ exports.updateuser = function(req, res, next) {
 }
 
 exports.deleteuser = function(req, res, next) {
-  User.findOne({
-      _id: mongoose.Types.ObjectId(req.user._id)
-    }).remove(function(err) {
+  // First delete the user's books
+  Book.find(
+    { addedBy: mongoose.Types.ObjectId(req.user._id) }
+  )
+  .remove()
+  .exec(function(err, data) {
       if (err) {
-        return res.status(400).json({ error: 'There was an error removing your account.' });
+        // Respond to request with error
+        return res.status(400).send({ error: 'Error removing documents.'} )
       }
-      return res.json(req.user);
-    });
+  })
+  // Then delete the user's requests
+  .then(function() {
+      Book.find(
+        { 'userRequest.user': mongoose.Types.ObjectId(req.user._id) },
+        function(err, docs) {
+          if (err) {
+            // Respond to request with error
+            return res.status(422).send({ error: 'Error deleting user requests.' })
+          }
+
+          docs.map((book) => {
+            book.userRequest = undefined
+            book.save(function(err, savedBook){
+              return savedBook
+            })
+          })
+      })
+  })
+  // Then delete the user
+  .then(function() {
+      User.findOne(
+        { _id: mongoose.Types.ObjectId(req.user._id)}
+      )
+      .remove(function(err) {
+          if (err) {
+            return res.status(400).json({ error: 'There was an error removing your account.' });
+          }
+          // Respond with the user ID so the store can be updated
+          return res.json({ _id: req.user._id} );
+      })
+  });
 }

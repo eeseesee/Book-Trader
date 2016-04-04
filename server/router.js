@@ -26,6 +26,4 @@ module.exports = function(app) {
   app.put('/books/request', requireAuth, Book.approverequest);
   app.delete('/books/request', requireAuth, Book.removerequest);
 
-  app.delete('/user/books', requireAuth, Book.deletebooksbyuser);
-  app.delete('/user/requests', requireAuth, Book.deleterequestsbyuser);
 }

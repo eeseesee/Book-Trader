@@ -1,4 +1,4 @@
-import { SIGN_OUT, FETCH_BOOKS, ADD_BOOK, DELETE_BOOK, DELETE_USER_BOOKS, REQUEST_BOOK, APPROVE_REQUEST, REMOVE_REQUEST } from '../actions/types';
+import { FETCH_BOOKS, ADD_BOOK, DELETE_BOOK, DELETE_USER, REQUEST_BOOK, APPROVE_REQUEST, REMOVE_REQUEST } from '../actions/types';
 
 export default function(books = [], action) {
   switch (action.type) {
@@ -10,9 +10,19 @@ export default function(books = [], action) {
       return books.filter((book) => {
         return book._id !== action.payload.data._id
       })
-    case DELETE_USER_BOOKS:
-      return books.filter((book) => {
+    case DELETE_USER:
+      return books
+      .filter((book) => {
         return book.addedBy !== action.payload.data._id
+      })
+      .map((book) => {
+        if (book.userRequest) {
+          if (book.userRequest.user === action.payload.data._id) {
+            book.userRequest = undefined
+            return book
+          }
+        }
+        return book
       })
     case REQUEST_BOOK:
       return books.map((book) => {

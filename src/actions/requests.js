@@ -3,8 +3,7 @@ import axios from 'axios';
 import {
   REQUEST_BOOK,
   APPROVE_REQUEST,
-  REMOVE_REQUEST,
-  DELETE_USER_REQUESTS
+  REMOVE_REQUEST
 } from './types'
 
 // REQUEST ACTIONS
@@ -54,17 +53,4 @@ export function removeRequest(bookID, token) {
     type: REMOVE_REQUEST,
     payload: removeRequest
   }
-}
-
-export function deleteUserRequests(token) {
-  const removeRequest = axios({
-    method: 'delete',
-    url: '/user/requests',
-    headers: {'Authorization': 'JWT '.concat(token)},
-  })
-
-  return {
-    type: DELETE_USER_REQUESTS,
-    payload: removeRequest
-  } 
 }

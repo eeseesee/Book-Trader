@@ -46,21 +46,6 @@ exports.getallbooks = function(req, res, next) {
     })
 }
 
-// Delete books added by a user (triggered if they delete their account)
-exports.deletebooksbyuser = function(req, res, next) {
-  Book.find({ addedBy: mongoose.Types.ObjectId(userID) })
-    .remove()
-    .exec(function(err, data) {
-      if (err) {
-        // Respond to request with error
-        return res.status(400).send({ error: 'Error removing documents.'} )
-      }
-
-      // Respond to request with id of user
-      return res.json({ _id: req.user._id });
-    })
-}
-
 // Place a request on a book
 exports.requestbook = function(req, res, next) {
   Book.findOne({
@@ -152,7 +137,6 @@ exports.removerequest = function(req, res, next) {
           // Respond to request with error
           return res.status(400).send({ error: 'Error requesting book. Try again later' })
         }
-        console.log(savedBook)
 
         // Respond to request with requested book id
         return res.json(savedBook)
@@ -162,19 +146,5 @@ exports.removerequest = function(req, res, next) {
     // Could not find book to update in db, respond to request with error
       return res.status(400).send({ error: 'Hmm...Cannot locate book. Try again later' })
     }
-  });
-}
-
-// Delete all requests added by a user (triggered if they delete their account)
-exports.deleterequestsbyuser = function(req, res, next) {
-  Book.update({ userRequest: {user: mongoose.Types.ObjectId(req.user._id) }}, { userRequest: undefined }, { multi: true }, function(err) {
-
-      if (err) {
-        // Respond to request with error
-        return res.status(422).send({ error: 'Error deleting user requests.' })
-      }
-
-      // Respond to request with id of user
-      return res.json({ _id: req.user._id });
   });
 }

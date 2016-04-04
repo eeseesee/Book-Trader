@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { signOutUser } from '../actions/auth'
 
 import {
   FETCH_USER,

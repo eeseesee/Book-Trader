@@ -3,8 +3,7 @@ import axios from 'axios';
 import {
   FETCH_BOOKS,
   ADD_BOOK,
-  DELETE_BOOK,
-  DELETE_USER_BOOKS
+  DELETE_BOOK
 } from './types';
 
 // BOOK ACTIONS
@@ -53,19 +52,6 @@ export function deleteBook(bookID, token) {
 
   return {
     type: DELETE_BOOK,
-    payload: deleteRequest
-  };
-}
-
-export function deleteUserBooks(token) {
-  const deleteRequest = axios({
-    method: 'delete',
-    url: '/user/books',
-    headers: {'Authorization': 'JWT '.concat(token)}
-  });
-
-  return {
-    type: DELETE_USER_BOOKS,
     payload: deleteRequest
   };
 }

@@ -38,8 +38,10 @@ class RequestItem extends Component {
             <div className="caption">
               <h3 className="title">{title}</h3>
               <h4 className="author">{authors}</h4>
-              <button onClick={this.handleClick.bind(this)} className={"btn btn-primary"+disabled} disabled={this.state.disabled}>{this.state.text}</button>
-            </div>
+              {this.state.text &&
+                <button onClick={this.handleClick.bind(this)} className={"btn btn-primary"+disabled} disabled={this.state.disabled}>{this.state.text}</button>
+              }
+          </div>
           </div>
         </div>
       </div>

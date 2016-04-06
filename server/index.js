@@ -10,8 +10,7 @@ const morgan = require('morgan');
 const app = express();
 const router = require('./router');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-dotenv.load();
+require('dotenv').config();
 
 // Webpack Setup
 const compiler = webpack(config);

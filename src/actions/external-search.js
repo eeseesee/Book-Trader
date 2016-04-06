@@ -1,23 +1,19 @@
-import axios from 'axios';
-import config from '../../config';
+import axios from 'axios'
 
 import {
   EXTERNAL_SEARCH,
   CLEAR_SEARCH
-} from './types';
+} from './types'
 
 // SEARCH ACTIONS
-export function externalSearch(search) {
-  const query = encodeURIComponent(search);
-  const googleBooksAPI = 'https://www.googleapis.com/books/v1/volumes?q=' + query + '&key=' + config.GOOGLE_BOOKS_KEY;
-
+export function externalSearch(search, token) {
 
   const externalRequest = axios({
-    method: 'get',
-    url: googleBooksAPI,
-    headers: {
-      'Content-type': 'application/json',
-      'Accept': 'application/json'
+    method: 'post',
+    url: '/external',
+    headers: {'Authorization': 'JWT '.concat(token)},
+    data: {
+      search: search
     }
   });
 

@@ -24,7 +24,7 @@ export default () => {
                         <i className="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
                     </span>
               <h4 className="service-heading">Browse</h4>
-              <p className="service-tag text-muted">See all the books our users own.</p>
+              <p className="service-tag text-muted">View books posted by other users.</p>
             </div>
             <div className="col-md-4">
               <span className="fa-stack fa-4x">

@@ -3,7 +3,7 @@ import { EXTERNAL_SEARCH, CLEAR_SEARCH } from '../actions/types';
 export default function(searchResults = [], action) {
   switch (action.type) {
     case EXTERNAL_SEARCH:
-      return action.payload.data.items
+      return action.payload.data
     case CLEAR_SEARCH:
       return []
     default:

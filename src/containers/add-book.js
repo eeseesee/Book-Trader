@@ -32,7 +32,7 @@ class AddBookPage extends Component {
   handleSubmit(event) {
     event.preventDefault();
     this.setState({ searching: true });
-    this.props.externalSearch(this.state.search);
+    this.props.externalSearch(this.state.search, this.props.token);
   }
 
   render() {

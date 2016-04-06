@@ -1,6 +1,7 @@
 const Authentication = require('./controllers/authentication');
 const User = require('./controllers/user');
 const Book = require('./controllers/book');
+const External = require('./controllers/external-search');
 const passportService = require('./services/passport');
 const passport = require('passport');
 
@@ -25,5 +26,8 @@ module.exports = function(app) {
   app.post('/books/request', requireAuth, Book.requestbook);
   app.put('/books/request', requireAuth, Book.approverequest);
   app.delete('/books/request', requireAuth, Book.removerequest);
+
+  // external search is handled by the external controller
+  app.post('/external', requireAuth, External.search);
 
 }

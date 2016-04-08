@@ -8,11 +8,9 @@ exports.search = function(req, res, next) {
 
   axios.get(googleBooksAPI)
   .then(function (response) {
-    console.log(response.data.items)
     res.json(response.data.items)
   })
   .catch(function (response) {
-    console.log(response);
     res.status(400).send({ error: 'Error searching for books.'} );
   });
 

@@ -3,29 +3,38 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var StatsPlugin = require('stats-webpack-plugin');
 
 module.exports = {
-  devtool: 'inline-source-map',
   entry: [
-    'webpack-hot-middleware/client?reload=true',
     path.join(__dirname, 'app/main.js')
   ],
   output: {
     path: path.join(__dirname, '/dist/'),
-    filename: '[name].js',
+    filename: '[name]-[hash].min.js',
     publicPath: '/'
   },
   plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
     new HtmlWebpackPlugin({
       template: 'app/index.tpl.html',
       inject: 'body',
       filename: 'index.html'
     }),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new ExtractTextPlugin('[name]-[hash].min.css'),
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        warnings: false,
+        screw_ie8: true
+      }
+    }),
+    new StatsPlugin('webpack.stats.json', {
+      source: false,
+      modules: false
+    }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     })
   ],
   module: {
@@ -34,7 +43,7 @@ module.exports = {
       exclude: /node_modules/,
       loader: 'babel',
       query: {
-        "presets": ["react", "es2015", "stage-0", "react-hmre"]
+        "presets": ["es2015", "stage-0", "react"]
       }
     }, {
       test: /\.json?$/,
@@ -50,11 +59,14 @@ module.exports = {
     },
     {
       test: /\.scss$/,
-      loader: 'style!css?localIdentName=[name]---[local]---[hash:base64:5]!postcss-loader!sass'
+      loader: ExtractTextPlugin.extract('style', 'css?localIdentName=[name]---[local]---[hash:base64:5]!postcss-loader!sass')
     },
     {
       test: /\.(jpe?g|png|gif|svg)$/,
       loader: 'file-loader?name=img/img-[hash:base64:5].[ext]'
     }]
-  }
+  },
+  postcss: [
+    require('autoprefixer')
+  ]
 };

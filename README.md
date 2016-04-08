@@ -1,7 +1,7 @@
 # Book Trader
 
 ###Project Details###
-Book Trader is a full stack JavaScript applications built for the Manage a Book Trading Club Dynamic Web Application Project at Free Code Camp.
+Book Trader is a full stack JavaScript application built for the Manage a Book Trading Club Dynamic Web Application Project at Free Code Camp.
 
 A running version of the app can be found at (insert heroku link here)
 
@@ -20,7 +20,7 @@ Fulfills the following user stories:
 - React Redux
 - React Router
 - ES6 and Babel
-- Node/Express server set up
+- Node/Express server
 - JWT & Passport Auth
 - Mongoose database control
 - RESTful API
@@ -28,9 +28,12 @@ Fulfills the following user stories:
 - Queries Google Books API
 - React Masonry layout
 - Bundled with Webpack
-- Set up for Mocha and Chai testing
 - Hot Module Reloading
 
-###TO DO###
-1. Add Tests
-2. Deploy to Heroku
+### Install and Running###
+`git clone https://github.com/eeseesee/book-trader.git`
+
+1. cd book-trader
+2. npm install
+3. npm start
+4. navigate to http://localhost:3000 in your browser of choice.

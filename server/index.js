@@ -1,55 +1,37 @@
 const path = require('path');
 const express = require('express');
-const webpack = require('webpack');
-const webpackMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
-const config = require('../webpack.config.js');
-const http = require('http');
 const bodyParser = require('body-parser');
-const morgan = require('morgan');
 const router = require('./router');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-const isDeveloping = process.env.NODE_ENV !== 'production';
-const port = isDeveloping ? 3000 : process.env.PORT;
-const app = express();
-
-// App Setup
-app.use(morgan('combined'));
+// App setup
+var app = express();
+var PORT = process.env.PORT || 8080
 app.use(bodyParser.json({ type: '*/*' }));
 router(app);
 
-// Hot Module Setup
-if (isDeveloping) {
-  const compiler = webpack(config);
-  const middleware = webpackMiddleware(compiler, {
-    publicPath: config.output.publicPath,
-    contentBase: 'src',
-    stats: {
-      colors: true,
-      hash: false,
-      timings: true,
-      chunks: false,
-      chunkModules: false,
-      modules: false
-    }
-  });
+// Dev setup
+if(process.env.NODE_ENV !== 'production') {
+  const morgan = require('morgan');
+  app.use(morgan('combined'));
 
-  app.use(express.static(__dirname + '../dist'));
-  app.use(middleware);
+  const webpackDevMiddleware = require('webpack-dev-middleware');
+  const webpackHotMiddleware = require('webpack-hot-middleware');
+  const webpack = require('webpack');
+  const config = require('../webpack.dev.config');
+  const compiler = webpack(config);
+
+  app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
   app.use(webpackHotMiddleware(compiler));
-  app.get('*', function response(req, res) {
-    res.write(middleware.fileSystem.readFileSync(path.join(__dirname, '../dist/index.html')));
-    res.end();
-    //res.sendFile(path.resolve(__dirname, '../dist/index.html'));
-  });
-} else {
-  app.use(express.static(__dirname + '../dist'));
-  app.get('*', function response(req, res) {
-    res.sendFile(path.join(__dirname, '../dist/index.html'));
-  });
 }
+
+// Static route setup
+app.use(express.static(path.resolve(__dirname, '../dist')));
+
+app.get('*', function(request, response) {
+  response.sendFile(path.resolve(__dirname, '../dist/index.html'));
+});
 
 // DB Setup
 const mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || "mongodb://localhost/booktrader";
@@ -62,8 +44,10 @@ mongoose.connect(mongoUri, function(err) {
     }
 });
 
-// Server Setup
-const server = http.createServer(app);
-server.listen(port, function() {
-  console.log('Server listening on:',port);
+app.listen(PORT, function(error) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.info("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORT, PORT);
+  }
 });

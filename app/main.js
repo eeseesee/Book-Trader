@@ -34,8 +34,9 @@ import requireAuth from './containers/require-authentication';
 import requireUNAuth from './containers/require-UNauthentication';
 
 const middlewares = [Async];
-const loggerMiddleware = createLogger();
-middlewares.push(loggerMiddleware);
+// Note: uncomment the following lines for action logger in the console during development
+//const loggerMiddleware = createLogger();
+//middlewares.push(loggerMiddleware);
 const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
 
 ReactDOM.render(

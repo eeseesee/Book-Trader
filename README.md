@@ -3,7 +3,7 @@
 ###Project Details###
 Book Trader is a full stack JavaScript application built for the Manage a Book Trading Club Dynamic Web Application Project at Free Code Camp.
 
-A running version of the app can be found at (insert heroku link here)
+A running version of the app can be found at https://ecc-booktrader.herokuapp.com/
 
 ###User Stories###
 Fulfills the following user stories:
@@ -36,4 +36,4 @@ Fulfills the following user stories:
 1. cd book-trader
 2. npm install
 3. npm start
-4. navigate to http://localhost:3000 in your browser of choice.
+4. navigate to http://localhost:8080 in your browser of choice.
